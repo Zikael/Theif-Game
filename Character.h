@@ -11,6 +11,7 @@ class Character : public State
 {
 protected:
 	float pMoveSpeed;
+	const float pRotateSpeed = 0.1f;
 	tle::IModel* pModel;
 
 	const float CAUGHT_DISTANCE = 1.f;	// Distance character has to be to "kill" the other
@@ -31,6 +32,10 @@ public:
 	void facingVector(float& x, float& y, float& z);
 
 	bool isFacing(tle::IModel* mod);
+
+	void turnTowards(tle::IModel* mod);
+
+	void turnTowards(float x, float y, float z);
 
 	void lookTowards(tle::IModel* mod);
 

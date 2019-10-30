@@ -21,7 +21,6 @@ void main()
 	myEngine->AddMediaFolder("./models");
 
 	/**** Set up your scene here ****/
-	
 
 	const float floorSoundCoords[5][3] = {
 		{10.0f, 0.0f, 0.0f},
@@ -123,7 +122,6 @@ void main()
 					theif->setState(states->getStateCollection().CREEP);
 				}
 			}
-			
 
 			// Respawn key
 			if (myEngine->KeyHit(Key_R))
@@ -133,14 +131,26 @@ void main()
 				guard->setState(states->getStateCollection().IDLE);
 			}
 
+			if (myEngine->KeyHit(Key_T))
+			{
+				// Set the theif + guard alive
+				theif->turnTowards(guard->getModel());
+			}
+
 			// Look At keys
 			if (myEngine->KeyHit(Key_O) || myEngine->KeyHeld(Key_O))
 			{
-				guard->lookTowards(theif->getModel());
+				if (!theif->isDead() && !guard->isDead())
+				{
+					guard->lookTowards(theif->getModel());
+				}
 			}
 			if (myEngine->KeyHit(Key_P) || myEngine->KeyHeld(Key_P))
 			{
-				theif->lookTowards(guard->getModel());
+				if (!theif->isDead() && !guard->isDead())
+				{
+					theif->lookTowards(guard->getModel());
+				}
 			}
 		}
 	}
